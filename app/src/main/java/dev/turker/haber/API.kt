@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import java.io.Serializable
 
 class ApiService {
     private val retrofit = Retrofit
@@ -20,7 +21,7 @@ data class Article(
     val id: Int,
     val title: String,
     val text: String
-)
+) : Serializable
 
 interface IArticleRepo{
     @GET("/")
