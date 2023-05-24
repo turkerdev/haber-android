@@ -24,8 +24,8 @@ fun ArticleList(articles: Array<Article>){
 @Preview(showBackground = true)
 fun PreviewArticleList(){
     val fakeArticles = arrayOf(
-        Article(1,"title 1","desc 1"),
-        Article(2, "title 2","desc 2")
+        Article("1","title 1","desc 1"),
+        Article("2", "title 2","desc 2")
     )
 
     HaberAppTheme {

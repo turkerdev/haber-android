@@ -25,8 +25,8 @@ import dev.turker.haber.ui.theme.HaberAppTheme
 fun ArticleCard(article: Article){
     val ctx = LocalContext.current
     val limit = 120
-    var desc = article.text.take(limit)
-    if(article.text.length > limit){
+    var desc = article.description.take(limit)
+    if(article.description.length > limit){
         desc = desc.trim() + "..."
     }
 
@@ -48,9 +48,9 @@ fun ArticleCard(article: Article){
 @Preview(showBackground = true)
 fun PreviewArticleCard(){
     val article = Article(
-        id = 1,
+        id = "1",
         title = "Elon Musk to Sell Tesla to Russia",
-        text = "Elon Musk, the CEO of Tesla, has announced that he is selling the company to Russia. Musk said that he made the decision after becoming disillusioned with the United States government. He also said that he believes that Russia is a more friendly and welcoming environment for business.")
+        description = "Elon Musk, the CEO of Tesla, has announced that he is selling the company to Russia. Musk said that he made the decision after becoming disillusioned with the United States government. He also said that he believes that Russia is a more friendly and welcoming environment for business.")
 
     HaberAppTheme {
         ArticleCard(article)

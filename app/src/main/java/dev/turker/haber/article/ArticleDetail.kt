@@ -22,7 +22,7 @@ fun ArticleDetail(article: Article){
     Column(Modifier.padding(8.dp)) {
         Text(article.title, fontSize = 36.sp, fontWeight = FontWeight.SemiBold)
         Divider()
-        Text(article.text, Modifier.padding(top = 12.dp))
+        Text(article.description, Modifier.padding(top = 12.dp))
     }
 }
 
@@ -30,9 +30,9 @@ fun ArticleDetail(article: Article){
 @Preview(showBackground = true)
 fun PreviewArticleDetail(){
     val article = Article(
-        id = 1,
+        id = "1",
         title = "Elon Musk to Sell Tesla to Russia",
-        text = "Elon Musk, the CEO of Tesla, has announced that he is selling the company to Russia. Musk said that he made the decision after becoming disillusioned with the United States government. He also said that he believes that Russia is a more friendly and welcoming environment for business.")
+        description = "Elon Musk, the CEO of Tesla, has announced that he is selling the company to Russia. Musk said that he made the decision after becoming disillusioned with the United States government. He also said that he believes that Russia is a more friendly and welcoming environment for business.")
 
     HaberAppTheme {
         ArticleDetail(article)

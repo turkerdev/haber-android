@@ -3,7 +3,10 @@ package dev.turker.haber
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 import java.io.Serializable
 
 class ApiService {
@@ -18,12 +21,28 @@ class ApiService {
 }
 
 data class Article(
-    val id: Int,
+    val id: String,
     val title: String,
-    val text: String
+    val description: String
 ) : Serializable
+
+data class Comment(
+    val id: String,
+    val comment: String
+) : Serializable
+
+data class NewComment(
+    val article_id:String,
+    val comment:String
+):Serializable
 
 interface IArticleRepo{
     @GET("/")
     fun getArticles(): Call<Array<Article>>
+
+    @GET("/comments/{id}")
+    fun getComments(@Path("id") articleId:String): Call<Array<Comment>>
+
+    @POST("/comment")
+    fun postComment(@Body newComment: NewComment): Call<Unit>
 }
