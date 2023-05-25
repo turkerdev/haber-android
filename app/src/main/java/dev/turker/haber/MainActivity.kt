@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             var articles by remember { mutableStateOf<Array<Article>>(emptyArray()) }
 
-            LaunchedEffect(key1 = articles){
+            LaunchedEffect(Unit){
                 CoroutineScope(Dispatchers.IO).launch {
                     articles = ApiService().article.getArticles().execute().body()!!
                 }

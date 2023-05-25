@@ -28,7 +28,7 @@ class ArticleActivity : ComponentActivity() {
             val article = intent.extras?.getSerializable("article") as Article
             var comments by remember { mutableStateOf<Array<Comment>>(emptyArray()) }
 
-            LaunchedEffect(key1 = comments){
+            LaunchedEffect(Unit){
                 CoroutineScope(Dispatchers.IO).launch {
                     comments = ApiService().article.getComments(article.id).execute().body()!!
                 }
