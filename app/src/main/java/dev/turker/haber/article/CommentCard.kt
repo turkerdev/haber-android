@@ -17,11 +17,13 @@ import dev.turker.haber.Comment
 @Composable
 fun CommentCard(comment: Comment){
     Card(Modifier.fillMaxWidth().padding(4.dp)){
-        Text("İsimsiz kullanıcı", style = dev.turker.haber.ui.theme.Typography.titleSmall)
+        Text("Guest commenter",
+            style = dev.turker.haber.ui.theme.Typography.titleSmall,
+            modifier = Modifier.padding(horizontal = 8.dp))
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = comment.comment,
-            modifier = Modifier.padding(all = 4.dp),
+            modifier = Modifier.padding(all = 8.dp),
             style = dev.turker.haber.ui.theme.Typography.bodyMedium
         )
     }
