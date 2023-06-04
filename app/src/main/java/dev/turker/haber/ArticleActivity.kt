@@ -1,15 +1,32 @@
 package dev.turker.haber
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import dev.turker.haber.article.ArticleDetail
 import dev.turker.haber.article.CommentList
 import dev.turker.haber.article.CommentWrite
@@ -22,6 +39,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ArticleActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,14 +73,35 @@ class ArticleActivity : ComponentActivity() {
                 fetchComments()
             }
 
+            val intent = Intent(LocalContext.current,MainActivity::class.java)
+
             HaberAppTheme {
-                Column{
-                    ArticleDetail(article)
-                    CommentWrite(article.id, { fetchComments() })
-                    if(!isCommentsLoading){
-                        CommentList(comments)
-                    } else {
-                        Text("Loading...")
+                Scaffold(topBar = {
+                    TopAppBar(title = {
+                        IconButton(onClick = {
+                            navigateUpTo(intent)
+                        }) {
+                            Icon(Icons.Rounded.ArrowBack, "")
+                        }
+                    })
+                }) { contentPadding ->
+                    Box(Modifier.padding(contentPadding)){
+                        Column{
+                            ArticleDetail(article)
+                            Divider()
+                            Box(modifier = Modifier.padding(8.dp,0.dp)){
+                                CommentWrite(article.id, { fetchComments() })
+                            }
+                            if(!isCommentsLoading){
+                                Box(Modifier.padding(8.dp)){
+                                    CommentList(comments)
+                                }
+                            } else {
+                                Box(modifier = Modifier.fillMaxWidth().padding(8.dp)){
+                                    LinearProgressIndicator(Modifier.align(Alignment.Center))
+                                }
+                            }
+                        }
                     }
                 }
             }
