@@ -3,6 +3,7 @@ package dev.turker.haber.article
 import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,7 +31,8 @@ fun ArticleCard(article: Article){
         desc = desc.trim() + "..."
     }
 
-    Card(onClick = {
+    Card(modifier = Modifier.fillMaxWidth(),
+        onClick = {
         val intent = Intent(ctx,ArticleActivity::class.java)
         intent.putExtra("article", article)
         ctx.startActivity(intent)

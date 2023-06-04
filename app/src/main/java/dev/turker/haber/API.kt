@@ -7,6 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 import java.io.Serializable
 
 class ApiService {
@@ -38,7 +39,7 @@ data class NewComment(
 
 interface IArticleRepo{
     @GET("/")
-    fun getArticles(): Call<Array<Article>>
+    fun getArticles(@Query("after") articleId:String?): Call<Array<Article>>
 
     @GET("/comments/{id}")
     fun getComments(@Path("id") articleId:String): Call<Array<Comment>>
