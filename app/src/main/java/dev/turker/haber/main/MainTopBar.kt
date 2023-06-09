@@ -3,6 +3,7 @@ package dev.turker.haber.main
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -12,6 +13,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,18 +28,26 @@ import dev.turker.haber.ui.theme.Shapes
 fun MainTopBar(onQueryChange: (String) -> Unit){
     var query by remember { mutableStateOf("") }
 
+    LaunchedEffect(query){
+        onQueryChange(query.trim())
+    }
+
     Surface(modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 10.dp)
-            .shadow(elevation = 3.dp, shape = Shapes.medium)
-            .fillMaxWidth()){
+        .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 10.dp)
+        .shadow(elevation = 3.dp, shape = Shapes.medium)
+        .fillMaxWidth()){
         TextField(
             value = query,
-            onValueChange = {
-                query = it
-                onQueryChange(it.trim())
-            },
+            onValueChange = { query = it },
             singleLine = true,
             placeholder = { Text(text = "Search News") },
+            leadingIcon = {
+                if(query.isNotEmpty()){
+                    IconButton(onClick = { query = "" }) {
+                        Icon(imageVector = Icons.Filled.Clear, contentDescription = "Clear")
+                    }
+                }
+            },
             trailingIcon = {
                 IconButton(onClick = { onQueryChange(query.trim()) }) {
                     Icon(imageVector = Icons.Filled.Search, contentDescription = "Search")
