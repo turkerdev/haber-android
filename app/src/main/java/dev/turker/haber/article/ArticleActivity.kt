@@ -1,4 +1,4 @@
-package dev.turker.haber
+package dev.turker.haber.article
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,9 +26,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import dev.turker.haber.article.ArticleDetail
-import dev.turker.haber.article.CommentList
-import dev.turker.haber.article.CommentWrite
+import dev.turker.haber.ApiService
+import dev.turker.haber.Article
+import dev.turker.haber.Comment
+import dev.turker.haber.main.MainActivity
 import dev.turker.haber.ui.theme.HaberAppTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -73,7 +73,7 @@ class ArticleActivity : ComponentActivity() {
                 fetchComments()
             }
 
-            val intent = Intent(LocalContext.current,MainActivity::class.java)
+            val intent = Intent(LocalContext.current, MainActivity::class.java)
 
             HaberAppTheme {
                 Scaffold(topBar = {

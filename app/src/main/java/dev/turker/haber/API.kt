@@ -41,6 +41,9 @@ interface IArticleRepo{
     @GET("/")
     fun getArticles(@Query("after") articleId:String?): Call<Array<Article>>
 
+    @GET("/search")
+    fun findArticles(@Query("q") query:String): Call<Array<Article>>
+
     @GET("/comments/{id}")
     fun getComments(@Path("id") articleId:String): Call<Array<Comment>>
 

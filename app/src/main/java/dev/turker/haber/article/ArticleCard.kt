@@ -1,6 +1,5 @@
 package dev.turker.haber.article
 
-import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,11 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
 import dev.turker.haber.Article
-import dev.turker.haber.ArticleActivity
-import dev.turker.haber.MainActivity
 import dev.turker.haber.ui.theme.HaberAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,7 +28,7 @@ fun ArticleCard(article: Article){
 
     Card(modifier = Modifier.fillMaxWidth(),
         onClick = {
-        val intent = Intent(ctx,ArticleActivity::class.java)
+        val intent = Intent(ctx, ArticleActivity::class.java)
         intent.putExtra("article", article)
         ctx.startActivity(intent)
     }) {
